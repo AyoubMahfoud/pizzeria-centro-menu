@@ -411,7 +411,7 @@ export default function AdminDashboard() {
               setEditingCategory(null)
               setShowCategoryModal(true)
             }}
-            onEdit={(category) => {
+            onEdit={(category: Category) => {
               setEditingCategory(category)
               setShowCategoryModal(true)
             }}
@@ -426,7 +426,7 @@ export default function AdminDashboard() {
               setEditingIngredient(null)
               setShowIngredientModal(true)
             }}
-            onEdit={(ingredient) => {
+            onEdit={(ingredient: Ingredient) => {
               setEditingIngredient(ingredient)
               setShowIngredientModal(true)
             }}
