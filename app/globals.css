@@ -1,19 +1,42 @@
 @import "tailwindcss";
 
 /* Fix per overflow mobile e zoom */
-html, body {
+html {
   overflow-x: hidden;
   width: 100%;
-  position: relative;
-}
-
-html {
+  height: 100%;
   -webkit-text-size-adjust: 100%;
   -ms-text-size-adjust: 100%;
 }
 
+body {
+  overflow-x: hidden;
+  width: 100%;
+  min-height: 100%;
+  position: relative;
+}
+
+#__next,
+[id*="root"],
+main {
+  overflow-x: hidden;
+  max-width: 100vw;
+}
+
 * {
   -webkit-tap-highlight-color: transparent;
+  box-sizing: border-box;
+}
+
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Previene overflow su tutti i container */
+.container {
+  max-width: 100vw !important;
+  overflow-x: hidden;
 }
 
 :root {

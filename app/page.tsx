@@ -30,7 +30,7 @@ export default async function HomePage() {
   const categoriesWithDishes = categories.filter(cat => cat.dishes.length > 0)
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-amber-50 via-white to-red-50">
+    <div className="min-h-screen bg-gradient-to-br from-amber-50 via-white to-red-50 overflow-x-hidden w-full">
       {/* Header */}
       <header className="sticky top-0 z-50 bg-white/90 backdrop-blur-md shadow-sm border-b border-gray-200">
         <div className="container mx-auto px-4 py-6">
