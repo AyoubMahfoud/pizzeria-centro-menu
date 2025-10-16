@@ -876,11 +876,11 @@ function IngredientsTab({
               !ingredient.available ? 'border-l-4 border-red-500 bg-red-50' : 'border-l-4 border-green-500'
             }`}
           >
-            <div className="flex items-center justify-between gap-6">
+            <div className="flex flex-col gap-4">
               {/* Nome e info */}
               <div className="flex-1 min-w-0">
-                <div className="flex items-center gap-3 mb-2">
-                  <h3 className="text-xl font-bold text-gray-900 truncate">
+                <div className="flex items-center gap-3 flex-wrap mb-2">
+                  <h3 className="text-xl font-bold text-gray-900">
                     {ingredient.name}
                   </h3>
                   {ingredient.available ? (
@@ -905,8 +905,8 @@ function IngredientsTab({
                 </p>
               </div>
 
-              {/* Toggle grande e chiaro */}
-              <div className="flex items-center gap-4">
+              {/* Toggle e Azioni */}
+              <div className="flex items-center justify-between gap-4">
                 <button
                   onClick={() => onToggleAvailability(ingredient.id)}
                   className={`relative inline-flex h-14 w-28 items-center rounded-full transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-offset-2 ${
