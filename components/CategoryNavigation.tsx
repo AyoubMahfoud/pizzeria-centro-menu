@@ -16,6 +16,10 @@ interface CategoryNavigationProps {
 export function CategoryNavigation({ categories }: CategoryNavigationProps) {
   const [isOpen, setIsOpen] = useState(false)
 
+  if (!categories || categories.length === 0) {
+    return null
+  }
+
   const scrollToCategory = (categoryId: string) => {
     const element = document.getElementById(`category-${categoryId}`)
     if (element) {
@@ -32,7 +36,7 @@ export function CategoryNavigation({ categories }: CategoryNavigationProps) {
   }
 
   return (
-    <div className="relative w-full max-w-xs mx-auto mt-4">
+    <div className="relative w-full max-w-xs mx-auto mt-4 z-50">
       {/* Dropdown Button */}
       <button
         onClick={() => setIsOpen(!isOpen)}
@@ -49,12 +53,17 @@ export function CategoryNavigation({ categories }: CategoryNavigationProps) {
         <>
           {/* Overlay per chiudere quando si clicca fuori */}
           <div
-            className="fixed inset-0 z-10"
+            className="fixed inset-0 z-40"
             onClick={() => setIsOpen(false)}
           />
 
           {/* Menu */}
-          <div className="absolute z-20 w-full mt-2 bg-white rounded-lg shadow-xl border border-gray-200 max-h-96 overflow-y-auto">
+          <div className="absolute z-50 w-full mt-2 bg-white rounded-lg shadow-2xl border-2 border-gray-300 max-h-96 overflow-y-auto">
+            {categories.length === 0 && (
+              <div className="px-4 py-3 text-gray-500 text-center">
+                Nessuna categoria disponibile
+              </div>
+            )}
             {categories.map((category) => (
               <button
                 key={category.id}

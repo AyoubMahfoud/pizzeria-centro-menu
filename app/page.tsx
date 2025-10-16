@@ -47,7 +47,7 @@ export default async function HomePage() {
       </header>
 
       {/* Category Navigation */}
-      <div className="container mx-auto px-4 py-4 max-w-5xl">
+      <div className="container mx-auto px-4 py-4 max-w-5xl relative">
         <CategoryNavigation categories={categoriesWithDishes} />
       </div>
 

@@ -36,7 +36,6 @@ main {
 /* Previene overflow su tutti i container */
 .container {
   max-width: 100vw !important;
-  overflow-x: hidden;
 }
 
 :root {
