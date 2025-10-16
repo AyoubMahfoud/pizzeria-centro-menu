@@ -45,6 +45,18 @@ main {
   max-width: 100vw !important;
 }
 
+/* Assicura visibilità delle card su tutti i dispositivi */
+[class*="grid"] {
+  width: 100%;
+}
+
+/* Fix per Safari mobile */
+@supports (-webkit-touch-callout: none) {
+  .min-h-screen {
+    min-height: -webkit-fill-available;
+  }
+}
+
 :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 255, 255, 255;

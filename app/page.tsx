@@ -89,7 +89,7 @@ export default async function HomePage() {
               </div>
 
               {/* Dishes Grid */}
-              <div className="grid gap-4 md:grid-cols-2">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full">
                 {category.dishes.map((dish) => {
                   // Verificare se tutti gli ingredienti sono disponibili
                   const unavailableIngredients = dish.ingredients.filter(
@@ -107,11 +107,11 @@ export default async function HomePage() {
                   return (
                     <div
                       key={dish.id}
-                      className={`bg-white rounded-lg shadow-md hover:shadow-lg transition-all duration-300 p-4 sm:p-5 border border-gray-100 ${
+                      className={`bg-white rounded-lg shadow-md hover:shadow-lg transition-all duration-300 p-4 sm:p-5 border border-gray-100 w-full min-h-[100px] ${
                         !isDishAvailable ? 'opacity-50' : ''
                       }`}
                     >
-                      <div className="flex justify-between items-start gap-2 sm:gap-3">
+                      <div className="flex justify-between items-start gap-2 sm:gap-3 w-full">
                         <div className="flex-1 min-w-0">
                           <div className="flex flex-col sm:flex-row sm:items-start gap-1 sm:gap-2">
                             <h3 className="text-base sm:text-lg font-semibold text-gray-900 break-words">
