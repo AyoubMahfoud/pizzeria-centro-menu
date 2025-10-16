@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -10,7 +7,6 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-// Admin user
 model User {
   id        String   @id @default(cuid())
   email     String   @unique
@@ -20,50 +16,46 @@ model User {
   updatedAt DateTime @updatedAt
 }
 
-// Categorie menu
 model Category {
   id          String   @id @default(cuid())
   name        String
   nameEn      String?
   description String?
   order       Int      @default(0)
-  dishes      Dish[]
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+  dishes      Dish[]
 }
 
-// Ingredienti
 model Ingredient {
-  id          String            @id @default(cuid())
-  name        String            @unique
-  available   Boolean           @default(true)
-  dishes      DishIngredient[]
-  createdAt   DateTime          @default(now())
-  updatedAt   DateTime          @updatedAt
+  id        String           @id @default(cuid())
+  name      String           @unique
+  available Boolean          @default(true)
+  createdAt DateTime         @default(now())
+  updatedAt DateTime         @updatedAt
+  dishes    DishIngredient[]
 }
 
-// Piatti/Pizze
 model Dish {
-  id                String            @id @default(cuid())
-  name              String
-  nameEn            String?
-  description       String?
-  descriptionEn     String?
-  price             Float
-  categoryId        String
-  category          Category          @relation(fields: [categoryId], references: [id], onDelete: Cascade)
-  ingredients       DishIngredient[]
-  allergens         String?           // Salvato come stringa JSON es: ["c", "f"]
-  available         Boolean           @default(true)
-  image             String?
-  order             Int               @default(0)
-  createdAt         DateTime          @default(now())
-  updatedAt         DateTime          @updatedAt
+  id            String           @id @default(cuid())
+  name          String
+  nameEn        String?
+  description   String?
+  descriptionEn String?
+  price         Float
+  categoryId    String
+  allergens     String?
+  available     Boolean          @default(true)
+  image         String?
+  order         Int              @default(0)
+  createdAt     DateTime         @default(now())
+  updatedAt     DateTime         @updatedAt
+  category      Category         @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  ingredients   DishIngredient[]
 
   @@index([categoryId])
 }
 
-// Tabella di relazione molti-a-molti
 model DishIngredient {
   id           String     @id @default(cuid())
   dishId       String

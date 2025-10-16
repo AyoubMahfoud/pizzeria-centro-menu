@@ -2,6 +2,10 @@ import { NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
 import { getSession } from '@/lib/jwt'
 
+export const runtime = 'nodejs'
+export const dynamic = 'force-dynamic'
+
+
 export async function GET() {
   try {
     const dishes = await prisma.dish.findMany({

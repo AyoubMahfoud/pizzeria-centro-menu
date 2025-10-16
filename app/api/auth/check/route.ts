@@ -2,6 +2,10 @@ import { NextResponse } from 'next/server'
 import { getSession } from '@/lib/jwt'
 import { prisma } from '@/lib/prisma'
 
+export const runtime = 'nodejs'
+export const dynamic = 'force-dynamic'
+
+
 export async function GET() {
   try {
     const session = await getSession()
