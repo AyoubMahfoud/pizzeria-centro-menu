@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server'
+import { revalidatePath } from 'next/cache'
 import { prisma } from '@/lib/prisma'
 import { getSession } from '@/lib/jwt'
 
@@ -31,6 +32,10 @@ export async function PUT(
       },
     })
 
+    // Revalidate all paths to refresh cache
+    revalidatePath('/')
+    revalidatePath('/admin')
+
     return NextResponse.json(category)
   } catch (error) {
     console.error('Update category error:', error)
@@ -56,6 +61,10 @@ export async function DELETE(
     await prisma.category.delete({
       where: { id },
     })
+
+    // Revalidate all paths to refresh cache
+    revalidatePath('/')
+    revalidatePath('/admin')
 
     return NextResponse.json({ success: true })
   } catch (error) {

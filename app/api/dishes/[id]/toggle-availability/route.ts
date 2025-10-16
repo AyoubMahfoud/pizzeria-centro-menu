@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server'
+import { revalidatePath } from 'next/cache'
 import { prisma } from '@/lib/prisma'
 import { getSession } from '@/lib/jwt'
 
@@ -33,6 +34,10 @@ export async function PATCH(
         available: !dish.available,
       },
     })
+
+    // Revalidate all paths to refresh cache
+    revalidatePath('/')
+    revalidatePath('/admin')
 
     return NextResponse.json(updated)
   } catch (error) {
