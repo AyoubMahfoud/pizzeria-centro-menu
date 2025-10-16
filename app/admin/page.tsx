@@ -395,7 +395,7 @@ export default function AdminDashboard() {
               setEditingDish(null)
               setShowDishModal(true)
             }}
-            onEdit={(dish) => {
+            onEdit={(dish: Dish) => {
               setEditingDish(dish)
               setShowDishModal(true)
             }}
