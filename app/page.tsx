@@ -1,5 +1,6 @@
 import { prisma } from '@/lib/prisma'
 import { ChefHat, Euro } from 'lucide-react'
+import { CategoryNavigation } from '@/components/CategoryNavigation'
 
 async function getMenuData() {
   const categories = await prisma.category.findMany({
@@ -45,6 +46,11 @@ export default async function HomePage() {
         </div>
       </header>
 
+      {/* Category Navigation */}
+      <div className="container mx-auto px-4 py-4 max-w-5xl">
+        <CategoryNavigation categories={categoriesWithDishes} />
+      </div>
+
       {/* Menu Content */}
       <main className="container mx-auto px-4 py-8 max-w-5xl">
         {/* Coperto */}
@@ -63,7 +69,8 @@ export default async function HomePage() {
           {categoriesWithDishes.map((category, idx) => (
             <section
               key={category.id}
-              className="animate-fade-in"
+              id={`category-${category.id}`}
+              className="animate-fade-in scroll-mt-24"
               style={{ animationDelay: `${idx * 100}ms` }}
             >
               {/* Category Header */}
