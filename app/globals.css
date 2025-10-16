@@ -7,6 +7,10 @@ html {
   height: 100%;
   -webkit-text-size-adjust: 100%;
   -ms-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  /* Migliore font rendering su tutti i dispositivi */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 body {
@@ -14,6 +18,9 @@ body {
   width: 100%;
   min-height: 100%;
   position: relative;
+  /* Forza hardware acceleration per rendering più fluido */
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
 }
 
 #__next,
