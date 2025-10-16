@@ -7,6 +7,12 @@ const inter = Inter({ subsets: ['latin'] })
 export const metadata: Metadata = {
   title: 'Pizzeria Centro - Menu Digitale',
   description: 'Menu digitale premium per Pizzeria Centro',
+  viewport: {
+    width: 'device-width',
+    initialScale: 1,
+    maximumScale: 5,
+    userScalable: true,
+  },
 }
 
 export default function RootLayout({

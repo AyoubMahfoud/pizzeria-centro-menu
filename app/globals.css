@@ -1,5 +1,21 @@
 @import "tailwindcss";
 
+/* Fix per overflow mobile e zoom */
+html, body {
+  overflow-x: hidden;
+  width: 100%;
+  position: relative;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+}
+
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
 :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 255, 255, 255;
