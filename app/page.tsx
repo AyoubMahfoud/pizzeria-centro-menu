@@ -53,15 +53,62 @@ export default async function HomePage() {
 
       {/* Menu Content */}
       <main className="container mx-auto px-4 py-8 max-w-5xl">
-        {/* Coperto */}
-        <div className="mb-6 sm:mb-8 p-3 sm:p-4 bg-amber-100 border-l-4 border-amber-500 rounded-r-lg">
-          <p className="text-xs sm:text-sm text-gray-700">
-            <span className="font-semibold">Coperto:</span> €2,50
-          </p>
-          <p className="text-xs text-gray-600 mt-1">
-            <span className="font-medium">'c'</span> = alimenti surgelati (frozen food) •
-            <span className="font-medium ml-2">'f'</span> = alimenti freschi (fresh food)
-          </p>
+        {/* Info Box */}
+        <div className="mb-6 sm:mb-8 space-y-4">
+          {/* Coperto */}
+          <div className="p-3 sm:p-4 bg-amber-100 border-l-4 border-amber-500 rounded-r-lg">
+            <p className="text-xs sm:text-sm text-gray-700">
+              <span className="font-semibold">Coperto:</span> €2,50
+            </p>
+            <p className="text-xs text-gray-600 mt-1">
+              <span className="font-medium">'c'</span> = alimenti surgelati (frozen food) •
+              <span className="font-medium ml-2">'f'</span> = alimenti freschi (fresh food)
+            </p>
+          </div>
+
+          {/* Pizza al Metro */}
+          <div className="p-3 sm:p-4 bg-green-50 border-l-4 border-green-500 rounded-r-lg">
+            <p className="text-sm sm:text-base font-bold text-gray-900 mb-2">
+              🍕 Pizza al Metro - CON FARINA INTEGRALE
+            </p>
+            <p className="text-xs text-gray-600 italic mb-2">
+              Dal lunedì al venerdì • Escluso il sabato sera
+            </p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs sm:text-sm">
+              <p className="text-gray-700">• 1 metro margherita: <span className="font-semibold">€25</span></p>
+              <p className="text-gray-700">• 1/2 metro margherita: <span className="font-semibold">€18</span></p>
+              <p className="text-gray-700">• 1 metro farcito: <span className="font-semibold">€41</span></p>
+              <p className="text-gray-700">• 1/2 metro farcito: <span className="font-semibold">€28</span></p>
+            </div>
+            <p className="text-xs text-gray-600 mt-2">
+              Aggiunte frutti di mare o funghi porcini ogni 1/4: <span className="font-semibold">€5</span>
+            </p>
+          </div>
+
+          {/* Opzioni Impasto */}
+          <div className="p-3 sm:p-4 bg-blue-50 border-l-4 border-blue-500 rounded-r-lg">
+            <p className="text-sm sm:text-base font-bold text-gray-900 mb-2">
+              Opzioni Impasto
+            </p>
+            <div className="space-y-1 text-xs sm:text-sm text-gray-700">
+              <p>• <span className="font-semibold">Impasto Integrale:</span> Disponibile su richiesta</p>
+              <p>• <span className="font-semibold">Pizza Senza Glutine:</span> Disponibile con supplemento (contattaci per info)</p>
+              <p>• <span className="font-semibold">Calzone Vesuvio:</span> Doppio impasto <span className="font-semibold text-red-600">+€2</span></p>
+            </div>
+          </div>
+
+          {/* Note Prezzi */}
+          <div className="p-3 sm:p-4 bg-gray-50 border-l-4 border-gray-400 rounded-r-lg">
+            <p className="text-xs sm:text-sm text-gray-700">
+              <span className="font-semibold">*</span> Le pizze baby hanno lo stesso prezzo delle pizze normali
+            </p>
+            <p className="text-xs sm:text-sm text-gray-700 mt-1">
+              <span className="font-semibold">**</span> Il prezzo delle aggiunte sulle pizze varia da €1 a €4 in base all'ingrediente scelto
+            </p>
+            <p className="text-xs sm:text-sm text-gray-700 mt-1">
+              <span className="font-semibold">***</span> Le aggiunte degli ingredienti sono sommate alla pizza con il prezzo più elevato
+            </p>
+          </div>
         </div>
 
         {/* Categories */}
@@ -158,7 +205,11 @@ export default async function HomePage() {
 
                         <div className="flex items-center gap-0.5 sm:gap-1 text-base sm:text-lg font-bold text-red-600 whitespace-nowrap flex-shrink-0">
                           <Euro className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
-                          <span>{dish.price.toFixed(2).replace('.', ',')}</span>
+                          <span>
+                            {dish.price % 1 === 0
+                              ? dish.price.toString()
+                              : dish.price.toFixed(2).replace('.', ',')}
+                          </span>
                         </div>
                       </div>
                     </div>
