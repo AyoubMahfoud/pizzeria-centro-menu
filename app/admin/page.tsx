@@ -170,13 +170,21 @@ export default function AdminDashboard() {
 
   const handleToggleDishAvailability = async (id: string) => {
     try {
+      console.log('Toggle dish:', id)
       const res = await fetch(`/api/dishes/${id}/toggle-availability`, {
         method: 'PATCH',
+        credentials: 'include',
       })
-      if (!res.ok) throw new Error('Errore nel cambio di disponibilità')
+      console.log('Response status:', res.status)
+      if (!res.ok) {
+        const errorData = await res.json()
+        console.error('Error response:', errorData)
+        throw new Error(errorData.error || 'Errore nel cambio di disponibilità')
+      }
       loadData()
     } catch (error) {
       console.error('Error toggling dish availability:', error)
+      alert('Errore nel cambio di disponibilità del piatto')
     }
   }
 
@@ -253,13 +261,21 @@ export default function AdminDashboard() {
 
   const handleToggleIngredientAvailability = async (id: string) => {
     try {
+      console.log('Toggle ingredient:', id)
       const res = await fetch(`/api/ingredients/${id}/toggle-availability`, {
         method: 'PATCH',
+        credentials: 'include',
       })
-      if (!res.ok) throw new Error('Errore nel cambio di disponibilità')
+      console.log('Response status:', res.status)
+      if (!res.ok) {
+        const errorData = await res.json()
+        console.error('Error response:', errorData)
+        throw new Error(errorData.error || 'Errore nel cambio di disponibilità')
+      }
       loadData()
     } catch (error) {
       console.error('Error toggling ingredient availability:', error)
+      alert('Errore nel cambio di disponibilità dell\'ingrediente')
     }
   }
 
