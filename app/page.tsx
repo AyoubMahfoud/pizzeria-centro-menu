@@ -253,10 +253,15 @@ export default async function HomePage() {
                   const isDishAvailable = dish.available && unavailableIngredients.length === 0
 
                   let allergens: string[] = []
+                  let foodMarkers: string[] = []
                   try {
-                    allergens = dish.allergens ? JSON.parse(dish.allergens) : []
+                    const allMarkers = dish.allergens ? JSON.parse(dish.allergens) : []
+                    // Separa 'c' e 'f' dagli allergeni veri
+                    allergens = allMarkers.filter((item: string) => item !== 'c' && item !== 'f')
+                    foodMarkers = allMarkers.filter((item: string) => item === 'c' || item === 'f')
                   } catch (e) {
                     allergens = []
+                    foodMarkers = []
                   }
 
                   return (
@@ -274,20 +279,27 @@ export default async function HomePage() {
 
                       <div className="relative flex justify-between items-start gap-3 sm:gap-4 w-full">
                         <div className="flex-1 min-w-0">
-                          <div className="flex items-start gap-2">
+                          <div className="flex items-start gap-2 flex-wrap">
                             <h3 className="text-lg sm:text-xl font-serif font-bold text-gray-900 break-words group-hover:text-red-900 transition-colors duration-300">
                               {dish.name}
                             </h3>
-                            {allergens.length > 0 && (
-                              <a
-                                href="#allergens-section"
-                                className="mt-1 w-5 h-5 rounded-full bg-gray-400 flex items-center justify-center text-white text-xs font-bold shadow-sm flex-shrink-0 hover:bg-gray-500 hover:scale-110 transition-all duration-200"
-                                title="Contiene allergeni - clicca per vedere la legenda"
-                                aria-label="Visualizza allergeni"
-                              >
-                                !
-                              </a>
-                            )}
+                            <div className="flex items-center gap-1.5 mt-0.5">
+                              {foodMarkers.map((marker, idx) => (
+                                <span key={idx} className="px-2 py-0.5 bg-gray-100 rounded text-gray-700 font-medium text-xs flex-shrink-0">
+                                  '{marker}'
+                                </span>
+                              ))}
+                              {allergens.length > 0 && (
+                                <a
+                                  href="#allergens-section"
+                                  className="w-5 h-5 rounded-full bg-gray-400 flex items-center justify-center text-white text-xs font-bold shadow-sm flex-shrink-0 hover:bg-gray-500 hover:scale-110 transition-all duration-200"
+                                  title="Contiene allergeni - clicca per vedere la legenda"
+                                  aria-label="Visualizza allergeni"
+                                >
+                                  !
+                                </a>
+                              )}
+                            </div>
                           </div>
 
                           {dish.nameEn && (

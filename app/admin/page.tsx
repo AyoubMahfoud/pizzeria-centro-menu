@@ -1005,7 +1005,7 @@ function DishModal({ dish, categories, ingredients, onClose, onSave }: any) {
     ingredientIds: dish?.ingredients?.map((i: any) => i.ingredient.id) || [],
   })
 
-  const allergenOptions = ['c', 'f']
+  const allergenOptions = ['c', 'f', '!']
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()

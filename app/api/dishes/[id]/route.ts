@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server'
 import { revalidatePath } from 'next/cache'
 import { prisma } from '@/lib/prisma'
 import { getSession } from '@/lib/jwt'
+import { handleDishOrder } from '@/lib/orderUtils'
 
 export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
@@ -33,6 +34,9 @@ export async function PUT(
       ingredientIds,
     } = data
 
+    // Gestire l'ordinamento automatico
+    const finalOrder = await handleDishOrder(categoryId, order, id)
+
     // Eliminare le vecchie relazioni ingredienti
     await prisma.dishIngredient.deleteMany({
       where: { dishId: id },
@@ -50,7 +54,7 @@ export async function PUT(
         categoryId,
         allergens: allergens ? JSON.stringify(allergens) : null,
         available: available !== false,
-        order: order || 0,
+        order: finalOrder,
         ingredients: {
           create: (ingredientIds || []).map((ingredientId: string) => ({
             ingredientId,

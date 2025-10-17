@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server'
 import { revalidatePath } from 'next/cache'
 import { prisma } from '@/lib/prisma'
 import { getSession } from '@/lib/jwt'
+import { handleCategoryOrder } from '@/lib/orderUtils'
 
 export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
@@ -39,12 +40,15 @@ export async function POST(request: Request) {
     const data = await request.json()
     const { name, nameEn, description, order } = data
 
+    // Gestire l'ordinamento automatico
+    const finalOrder = await handleCategoryOrder(order)
+
     const category = await prisma.category.create({
       data: {
         name,
         nameEn: nameEn || null,
         description: description || null,
-        order: order || 0,
+        order: finalOrder,
       },
     })
 
