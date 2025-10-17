@@ -320,11 +320,11 @@ export default async function HomePage() {
                             </p>
                           )}
 
-                          {!isDishAvailable && (
-                            <div className="mt-3 inline-flex items-center gap-2 px-3 py-1.5 bg-red-100 border border-red-300 rounded-full">
-                              <div className="w-2 h-2 rounded-full bg-red-600 animate-pulse"></div>
-                              <p className="text-xs sm:text-sm text-red-700 font-medium">
-                                Non disponibile
+                          {unavailableIngredients.length > 0 && (
+                            <div className="mt-3 inline-flex items-center gap-2 px-3 py-1.5 bg-amber-100 border border-amber-300 rounded-lg">
+                              <div className="w-2 h-2 rounded-full bg-amber-600 animate-pulse"></div>
+                              <p className="text-xs sm:text-sm text-amber-800 font-medium">
+                                {unavailableIngredients.map(di => di.ingredient.name).join(', ')} non {unavailableIngredients.length === 1 ? 'disponibile' : 'disponibili'}
                               </p>
                             </div>
                           )}
