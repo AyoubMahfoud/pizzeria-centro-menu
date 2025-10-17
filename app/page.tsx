@@ -31,16 +31,29 @@ export default async function HomePage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-amber-50 via-white to-red-50 overflow-x-hidden w-full">
-      {/* Header */}
-      <header className="sticky top-0 z-50 bg-white/90 backdrop-blur-md shadow-sm border-b border-gray-200">
-        <div className="container mx-auto px-4 py-4 sm:py-6">
-          <div className="flex items-center justify-center gap-2 sm:gap-3">
-            <ChefHat className="w-6 h-6 sm:w-8 sm:h-8 text-red-600 flex-shrink-0" />
+      {/* Premium Header */}
+      <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-xl shadow-2xl border-b border-gray-200/50">
+        <div className="absolute inset-0 bg-gradient-to-r from-red-50/30 via-transparent to-amber-50/30"></div>
+        <div className="relative container mx-auto px-4 py-5 sm:py-7">
+          <div className="flex items-center justify-center gap-3 sm:gap-4">
+            {/* Premium Logo Badge */}
+            <div className="relative">
+              <div className="absolute inset-0 bg-gradient-to-br from-red-500 to-orange-600 rounded-2xl blur-lg opacity-40 animate-pulse"></div>
+              <div className="relative w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-gradient-to-br from-red-600 via-red-500 to-orange-600 flex items-center justify-center shadow-2xl transform hover:scale-110 transition-transform duration-300">
+                <ChefHat className="w-7 h-7 sm:w-9 sm:h-9 text-white" strokeWidth={2.5} />
+              </div>
+            </div>
+
+            {/* Premium Title */}
             <div className="text-center">
-              <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl font-serif font-bold bg-gradient-to-r from-gray-900 via-red-900 to-gray-900 bg-clip-text text-transparent tracking-tight">
                 Pizzeria Centro
               </h1>
-              <p className="text-xs sm:text-sm text-gray-600">Menu Digitale</p>
+              <div className="flex items-center justify-center gap-2 mt-1">
+                <div className="h-px w-8 bg-gradient-to-r from-transparent to-red-400"></div>
+                <p className="text-xs sm:text-sm text-gray-500 uppercase tracking-[0.2em] font-light">Menu Digitale Premium</p>
+                <div className="h-px w-8 bg-gradient-to-l from-transparent to-red-400"></div>
+              </div>
             </div>
           </div>
         </div>
@@ -151,7 +164,7 @@ export default async function HomePage() {
                     <div className="w-2 h-2 rounded-full bg-blue-500 mt-2 group-hover:scale-150 transition-transform"></div>
                     <div className="flex-1">
                       <p className="font-semibold text-gray-900 mb-1">Impasto Integrale</p>
-                      <p className="text-sm text-gray-600 font-light">Disponibile su richiesta per un'esperienza più salutare</p>
+                      <p className="text-sm text-gray-600 font-light">Disponibile con supplemento</p>
                     </div>
                   </div>
                 </div>
@@ -204,7 +217,7 @@ export default async function HomePage() {
         </div>
 
         {/* Categories */}
-        <div className="space-y-12">
+        <div className="space-y-12" id="menu-categories">
           {categoriesWithDishes.map((category, idx) => (
             <section
               key={category.id}
@@ -212,16 +225,19 @@ export default async function HomePage() {
               className="animate-fade-in scroll-mt-24"
               style={{ animationDelay: `${idx * 100}ms` }}
             >
-              {/* Category Header */}
-              <div className="mb-4 sm:mb-6">
-                <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-1 border-b-2 border-red-600 pb-2 inline-block">
-                  {category.name}
-                </h2>
+              {/* Premium Category Header */}
+              <div className="mb-6 sm:mb-8">
+                <div className="relative inline-block">
+                  <div className="absolute -bottom-2 left-0 right-0 h-3 bg-gradient-to-r from-red-500/20 via-red-600/30 to-orange-500/20 blur-sm"></div>
+                  <h2 className="relative text-3xl sm:text-4xl font-serif font-bold bg-gradient-to-r from-gray-900 via-red-900 to-gray-900 bg-clip-text text-transparent pb-3 border-b-2 border-red-600">
+                    {category.name}
+                  </h2>
+                </div>
                 {category.nameEn && (
-                  <p className="text-base sm:text-lg text-gray-600 italic mt-1">{category.nameEn}</p>
+                  <p className="text-base sm:text-lg text-gray-500 italic mt-3 font-light tracking-wide">{category.nameEn}</p>
                 )}
                 {category.description && (
-                  <p className="text-xs sm:text-sm text-amber-700 mt-2 font-medium break-words">
+                  <p className="text-sm sm:text-base text-amber-800 mt-3 font-light break-words bg-amber-50/50 px-4 py-2 rounded-lg border-l-2 border-amber-400">
                     {category.description}
                   </p>
                 )}
@@ -246,62 +262,72 @@ export default async function HomePage() {
                   return (
                     <div
                       key={dish.id}
-                      className={`bg-white rounded-lg shadow-md hover:shadow-lg transition-all duration-300 p-4 sm:p-5 border border-gray-100 w-full min-h-[100px] ${
-                        !isDishAvailable ? 'opacity-50' : ''
+                      className={`group relative overflow-hidden bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 p-5 sm:p-6 border border-gray-200/50 w-full min-h-[100px] hover:scale-[1.02] hover:-translate-y-1 ${
+                        !isDishAvailable ? 'opacity-50 grayscale' : ''
                       }`}
                     >
-                      <div className="flex justify-between items-start gap-2 sm:gap-3 w-full">
+                      {/* Gradient Background Effect */}
+                      <div className="absolute inset-0 bg-gradient-to-br from-red-50/0 via-transparent to-amber-50/0 group-hover:from-red-50/50 group-hover:to-amber-50/30 transition-all duration-500"></div>
+
+                      {/* Premium Border Shine */}
+                      <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-transparent via-red-200/0 to-transparent group-hover:via-red-200/50 transition-all duration-700"></div>
+
+                      <div className="relative flex justify-between items-start gap-3 sm:gap-4 w-full">
                         <div className="flex-1 min-w-0">
-                          <div className="flex flex-col sm:flex-row sm:items-start gap-1 sm:gap-2">
-                            <h3 className="text-base sm:text-lg font-semibold text-gray-900 break-words">
+                          <div className="flex items-start gap-2">
+                            <h3 className="text-lg sm:text-xl font-serif font-bold text-gray-900 break-words group-hover:text-red-900 transition-colors duration-300">
                               {dish.name}
                             </h3>
                             {allergens.length > 0 && (
-                              <div className="flex flex-wrap gap-1">
-                                {allergens.map((allergen) => (
-                                  <span
-                                    key={allergen}
-                                    className="text-xs bg-blue-100 text-blue-700 px-1.5 py-0.5 rounded whitespace-nowrap"
-                                  >
-                                    {allergen}
-                                  </span>
-                                ))}
-                              </div>
+                              <a
+                                href="#allergens-section"
+                                className="mt-1 w-5 h-5 rounded-full bg-gray-400 flex items-center justify-center text-white text-xs font-bold shadow-sm flex-shrink-0 hover:bg-gray-500 hover:scale-110 transition-all duration-200"
+                                title="Contiene allergeni - clicca per vedere la legenda"
+                                aria-label="Visualizza allergeni"
+                              >
+                                !
+                              </a>
                             )}
                           </div>
 
                           {dish.nameEn && (
-                            <p className="text-xs sm:text-sm text-gray-500 italic mt-0.5 break-words">
+                            <p className="text-sm sm:text-base text-gray-400 italic mt-1 break-words font-light tracking-wide">
                               {dish.nameEn}
                             </p>
                           )}
 
                           {dish.description && (
-                            <p className="text-xs sm:text-sm text-gray-600 mt-2 break-words">
+                            <p className="text-sm sm:text-base text-gray-700 mt-3 break-words font-light leading-relaxed">
                               {dish.description}
                             </p>
                           )}
 
                           {dish.descriptionEn && (
-                            <p className="text-xs text-gray-500 italic mt-1 break-words">
+                            <p className="text-xs sm:text-sm text-gray-400 italic mt-2 break-words font-light">
                               {dish.descriptionEn}
                             </p>
                           )}
 
                           {!isDishAvailable && (
-                            <p className="text-xs sm:text-sm text-red-600 font-medium mt-2">
-                              Non disponibile
-                            </p>
+                            <div className="mt-3 inline-flex items-center gap-2 px-3 py-1.5 bg-red-100 border border-red-300 rounded-full">
+                              <div className="w-2 h-2 rounded-full bg-red-600 animate-pulse"></div>
+                              <p className="text-xs sm:text-sm text-red-700 font-medium">
+                                Non disponibile
+                              </p>
+                            </div>
                           )}
                         </div>
 
-                        <div className="flex items-center gap-0.5 sm:gap-1 text-base sm:text-lg font-bold text-red-600 whitespace-nowrap flex-shrink-0">
-                          <Euro className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
-                          <span>
-                            {dish.price % 1 === 0
-                              ? dish.price.toString()
-                              : dish.price.toFixed(2).replace('.', ',')}
-                          </span>
+                        {/* Premium Price Badge */}
+                        <div className="flex-shrink-0">
+                          <div className="flex items-center gap-1.5">
+                            <Euro className="w-4 h-4 sm:w-5 sm:h-5 text-gray-700" strokeWidth={2.5} />
+                            <span className="text-xl sm:text-2xl font-serif font-bold text-gray-900">
+                              {dish.price % 1 === 0
+                                ? dish.price.toString()
+                                : dish.price.toFixed(2).replace('.', ',')}
+                            </span>
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -311,14 +337,122 @@ export default async function HomePage() {
             </section>
           ))}
         </div>
+
+        {/* Premium Allergen Section */}
+        <section className="mt-20 mb-12" id="allergens-section">
+          <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-amber-50 via-orange-50 to-red-50 border-2 border-orange-200/50 shadow-2xl">
+            {/* Decorative Elements */}
+            <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-orange-200/30 to-red-200/30 rounded-full blur-3xl"></div>
+            <div className="absolute bottom-0 left-0 w-64 h-64 bg-gradient-to-tr from-amber-200/30 to-yellow-200/30 rounded-full blur-3xl"></div>
+
+            <div className="relative p-4 sm:p-8 lg:p-12">
+              {/* Header */}
+              <div className="text-center mb-6 sm:mb-10">
+                <div className="inline-flex items-center justify-center w-12 h-12 sm:w-16 sm:h-16 rounded-2xl bg-gradient-to-br from-amber-500 to-orange-600 shadow-xl mb-3 sm:mb-4">
+                  <span className="text-2xl sm:text-3xl">⚠️</span>
+                </div>
+                <h2 className="text-2xl sm:text-3xl lg:text-4xl font-serif font-bold bg-gradient-to-r from-gray-900 via-orange-900 to-gray-900 bg-clip-text text-transparent mb-2 sm:mb-3 px-2">
+                  Informazioni Allergeni
+                </h2>
+                <p className="text-sm sm:text-base lg:text-lg text-gray-700 font-light max-w-3xl mx-auto px-4">
+                  I piatti contrassegnati con il simbolo <span className="inline-flex items-center justify-center w-4 h-4 sm:w-5 sm:h-5 rounded-full bg-gray-400 text-white text-xs font-bold mx-1">!</span> contengono allergeni.
+                  <br className="hidden sm:block" />
+                  <span className="hidden sm:inline">Consulta la lista completa qui sotto secondo il Regolamento UE 1169/2011.</span>
+                </p>
+              </div>
+
+              {/* Allergen Legend Grid */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 max-w-5xl mx-auto">
+                {[
+                  { number: '1', name: 'Glutine', icon: '🌾', desc: 'Cereali contenenti glutine' },
+                  { number: '2', name: 'Crostacei', icon: '🦐', desc: 'e prodotti derivati' },
+                  { number: '3', name: 'Uova', icon: '🥚', desc: 'e prodotti derivati' },
+                  { number: '4', name: 'Pesce', icon: '🐟', desc: 'e prodotti derivati' },
+                  { number: '5', name: 'Arachidi', icon: '🥜', desc: 'e prodotti derivati' },
+                  { number: '6', name: 'Soia', icon: '🫘', desc: 'e prodotti derivati' },
+                  { number: '7', name: 'Latte', icon: '🥛', desc: 'e prodotti derivati (lattosio)' },
+                  { number: '8', name: 'Frutta a guscio', icon: '🌰', desc: 'Noci, mandorle, etc.' },
+                  { number: '9', name: 'Sedano', icon: '🥬', desc: 'e prodotti derivati' },
+                  { number: '10', name: 'Senape', icon: '🌭', desc: 'e prodotti derivati' },
+                  { number: '11', name: 'Semi di sesamo', icon: '🫚', desc: 'e prodotti derivati' },
+                  { number: '12', name: 'Anidride solforosa', icon: '💨', desc: 'e solfiti (>10mg/kg)' },
+                  { number: '13', name: 'Lupini', icon: '🫘', desc: 'e prodotti derivati' },
+                  { number: '14', name: 'Molluschi', icon: '🦑', desc: 'e prodotti derivati' },
+                ].map((allergen) => (
+                  <div
+                    key={allergen.number}
+                    className="group relative overflow-hidden rounded-xl sm:rounded-2xl bg-white/80 backdrop-blur-sm border border-orange-200/50 p-3 sm:p-4 lg:p-5 hover:shadow-xl transition-all duration-300 sm:hover:scale-105"
+                  >
+                    <div className="absolute inset-0 bg-gradient-to-br from-orange-50/0 to-amber-50/0 group-hover:from-orange-50/50 group-hover:to-amber-50/50 transition-all duration-300"></div>
+
+                    <div className="relative flex items-start gap-2 sm:gap-3 lg:gap-4">
+                      {/* Number Badge */}
+                      <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-gradient-to-br from-orange-500 to-red-600 flex items-center justify-center shadow-lg flex-shrink-0">
+                        <span className="text-white font-bold text-xs sm:text-sm">{allergen.number}</span>
+                      </div>
+
+                      {/* Content */}
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center gap-1.5 sm:gap-2 mb-0.5 sm:mb-1">
+                          <span className="text-xl sm:text-2xl">{allergen.icon}</span>
+                          <h3 className="font-serif font-bold text-gray-900 text-sm sm:text-base lg:text-lg">{allergen.name}</h3>
+                        </div>
+                        <p className="text-xs sm:text-sm text-gray-600 font-light">{allergen.desc}</p>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Important Notice */}
+              <div className="mt-6 sm:mt-10 p-4 sm:p-6 bg-white/60 backdrop-blur-sm rounded-xl sm:rounded-2xl border-2 border-orange-300/50">
+                <p className="text-xs sm:text-sm text-gray-700 text-center font-light leading-relaxed">
+                  <span className="font-semibold text-orange-900">⚠️ Importante:</span> Se soffri di allergie o intolleranze alimentari,
+                  <span className="font-semibold"> comunica sempre le tue esigenze al nostro staff</span> prima di ordinare.
+                  Alcuni piatti potrebbero contenere tracce di altri allergeni a causa della preparazione in cucina condivisa.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
       </main>
 
-      {/* Footer */}
-      <footer className="mt-16 py-8 bg-gray-900 text-white">
-        <div className="container mx-auto px-4 text-center">
-          <p className="text-sm">
-            © {new Date().getFullYear()} Pizzeria Centro - Menu Digitale Premium
-          </p>
+      {/* Premium Footer */}
+      <footer className="relative mt-20 py-12 bg-gradient-to-br from-gray-900 via-gray-800 to-black overflow-hidden">
+        {/* Decorative Elements */}
+        <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-red-500 to-transparent"></div>
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-red-900/10 via-transparent to-transparent"></div>
+
+        <div className="relative container mx-auto px-4">
+          <div className="max-w-4xl mx-auto">
+            {/* Logo Section */}
+            <div className="flex items-center justify-center gap-4 mb-6">
+              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-red-600 to-orange-600 flex items-center justify-center shadow-xl">
+                <ChefHat className="w-6 h-6 text-white" strokeWidth={2.5} />
+              </div>
+              <div>
+                <h3 className="text-2xl font-serif font-bold text-white">Pizzeria Centro</h3>
+                <p className="text-xs text-gray-400 uppercase tracking-widest">Tradizione & Qualità</p>
+              </div>
+            </div>
+
+            {/* Divider */}
+            <div className="flex items-center justify-center gap-4 my-8">
+              <div className="h-px w-20 bg-gradient-to-r from-transparent to-red-500"></div>
+              <div className="w-2 h-2 rounded-full bg-red-500"></div>
+              <div className="h-px w-20 bg-gradient-to-l from-transparent to-red-500"></div>
+            </div>
+
+            {/* Copyright */}
+            <div className="text-center">
+              <p className="text-sm text-gray-400 font-light">
+                © {new Date().getFullYear()} Pizzeria Centro · Menu Digitale TheWolf
+              </p>
+              <p className="text-xs text-gray-500 mt-2 font-light">
+                Con passione dal cuore di Novara
+              </p>
+            </div>
+          </div>
         </div>
       </footer>
     </div>
