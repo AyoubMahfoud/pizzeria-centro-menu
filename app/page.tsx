@@ -458,7 +458,7 @@ export default async function HomePage() {
             {/* Copyright */}
             <div className="text-center">
               <p className="text-sm text-gray-400 font-light">
-                © {new Date().getFullYear()} Pizzeria Centro · Menu Digitale TheWolf
+                © {new Date().getFullYear()} Pizzeria Centro · Menu Digitale by TheWolf
               </p>
               <p className="text-xs text-gray-500 mt-2 font-light">
                 Con passione dal cuore di Novara
